@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
-use Illuminate\Http\Request;
 
 class ArtcleController extends Controller
 {
@@ -38,5 +37,22 @@ class ArtcleController extends Controller
         }
 
         dd('Created');
+    }
+
+    public function update() {
+        $article = Article::find(2);
+        $article->update([
+            'title' => 'Updated something beautiful',
+            'content' => 'Updated very beautiful content'
+        ]);
+
+        dd('Updated');
+    }
+
+    public function delte() {
+        $article = Article::withTrashed()->find(2);
+        $article->restore();
+
+        dd('Deleted');
     }
 }
