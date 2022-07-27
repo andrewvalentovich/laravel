@@ -22,5 +22,7 @@ Route::group(['prefix' => 'articles'], function () {
     Route::get('/', [ArtcleController::class, 'index']);
     Route::get('/create/', [ArtcleController::class, 'create']);
     Route::get('/update/', [ArtcleController::class, 'update']);
-    Route::get('/delete/', [ArtcleController::class, 'delte']);
+    Route::get('/delete/', [ArtcleController::class, 'delete']);
+    Route::get('/first_or_create', [ArtcleController::class, 'firstOrCreate']);
+    Route::get('/update_or_create', [ArtcleController::class, 'updateOrCreate']);
 });

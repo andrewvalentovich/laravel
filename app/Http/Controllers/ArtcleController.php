@@ -49,10 +49,40 @@ class ArtcleController extends Controller
         dd('Updated');
     }
 
-    public function delte() {
+    public function delete() {
         $article = Article::withTrashed()->find(2);
         $article->restore();
 
         dd('Deleted');
+    }
+
+    public function firstOrCreate() {
+        $article = Article::firstOrCreate([
+            'title' => 'Something beautiful'
+        ],[
+            'title' => 'Something ugly',
+            'content' => 'Very ugly content',
+            'image' => '',
+            'likes' => 20,
+            'is_published' => 1
+        ]);
+
+        dump($article->title);
+        dd('First or create');
+    }
+
+    public function updateOrCreate() {
+        $article = Article::updateOrCreate([
+            'title' => 'Something ugly'
+        ],[
+            'title' => 'Something ugly',
+            'content' => 'Very smart content',
+            'image' => '',
+            'likes' => 100,
+            'is_published' => 1
+        ]);
+
+        dump($article->title);
+        dd('Update or create');
     }
 }
