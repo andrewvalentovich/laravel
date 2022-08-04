@@ -8,32 +8,25 @@ class ArtcleController extends Controller
 {
     public function index() {
         $articles = Article::all();
-        return view('articles', compact('articles')); // передаём переменную articles в blade, которую
-    }                                                                 // можем получить по соответствующему имени
+        return view('article.index', compact('articles')); // передаём переменную articles в blade, которую
+    }                                                                       // можем получить по соответствующему имени
 
     public function create() {
-        $arr = [
-            [
-                'title' => 'Something beautiful',
-                'content' => 'Very beautiful content',
-                'image' => '',
-                'likes' => 20,
-                'is_published' => 1
-            ],
-            [
-                'title' => 'Another something beautiful',
-                'content' => 'Another very beautiful content',
-                'image' => '',
-                'likes' => 42,
-                'is_published' => 0
-            ],
-        ];
+        return view('article.create');
+    }                                                            // можем получить по соответствующему имени
 
-        foreach ($arr as $item) {
-            Article::create($item);
-        }
+    public function store() {
+        $data = request()->validate([
+            'title' => 'string',
+            'image' => 'string',
+            'content' => 'string'
+        ]);
+        Article::create($data);
+        return redirect()->route('articles.index');
+    }
 
-        dd('Created');
+    public function show(Article $article) {
+        dd($article->title);
     }
 
     public function update() {
