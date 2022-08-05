@@ -12,12 +12,17 @@
                         <div id="articleTitle" class="form-text">We'll never share your title with anyone else.</div>
                     </div>
                     <div class="mb-3">
+                        <label for="articleDescription" class="form-label">Description</label>
+                        <textarea name="description" class="form-control" id="articleDescription" rows="2"></textarea>
+                    </div>
+                    <div class="mb-3">
                         <label for="articleImage" class="form-label">Image</label>
                         <input type="text" name="image" class="form-control" id="articleImage" aria-describedby="articleImage">
+                        <div id="articleTitle" class="form-text">We'll never share your image with anyone else.</div>
                     </div>
                     <div class="mb-3">
                         <label for="articleContent" class="form-label">Content</label>
-                        <textarea name="content" class="form-control" id="articleContent" rows="3"></textarea>
+                        <textarea name="content" class="form-control" id="articleContent" rows="5"></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary">Create</button>
                 </form>

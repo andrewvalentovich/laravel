@@ -26,7 +26,10 @@ Route::group(['prefix' => 'articles'], function () {
     Route::get('/create', [ArtcleController::class, 'create'])->name('articles.create');
     Route::post('/', [ArtcleController::class, 'store'])->name('articles.store');
     Route::get('/{article}', [ArtcleController::class, 'show'])->name('articles.show');
-    Route::get('/update', [ArtcleController::class, 'update']);
+    Route::get('/{article}/edit', [ArtcleController::class, 'edit'])->name('articles.edit');
+    Route::put('/{article}', [ArtcleController::class, 'update'])->name('articles.update');
+    Route::delete('/{article}', [ArtcleController::class, 'destroy'])->name('articles.delete');
+
     Route::get('/delete', [ArtcleController::class, 'delete']);
     Route::get('/first_or_create', [ArtcleController::class, 'firstOrCreate']);
     Route::get('/update_or_create', [ArtcleController::class, 'updateOrCreate']);

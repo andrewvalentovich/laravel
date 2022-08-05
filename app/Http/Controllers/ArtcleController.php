@@ -8,16 +8,17 @@ class ArtcleController extends Controller
 {
     public function index() {
         $articles = Article::all();
-        return view('article.index', compact('articles')); // передаём переменную articles в blade, которую
+        return view('articles.index', compact('articles')); // передаём переменную articles в blade, которую
     }                                                                       // можем получить по соответствующему имени
 
     public function create() {
-        return view('article.create');
+        return view('articles.create');
     }                                                            // можем получить по соответствующему имени
 
     public function store() {
         $data = request()->validate([
             'title' => 'string',
+            'description' => 'string',
             'image' => 'string',
             'content' => 'string'
         ]);
@@ -26,24 +27,27 @@ class ArtcleController extends Controller
     }
 
     public function show(Article $article) {
-        dd($article->title);
+        return view('articles.show', compact('article'));
     }
 
-    public function update() {
-        $article = Article::find(2);
-        $article->update([
-            'title' => 'Updated something beautiful',
-            'content' => 'Updated very beautiful content'
+    public function edit(Article $article) {
+        return view('articles.edit', compact('article'));
+    }
+
+    public function update(Article $article) {
+        $data = request()->validate([
+            'title' => 'string',
+            'description' => 'string',
+            'image' => 'string',
+            'content' => 'string'
         ]);
-
-        dd('Updated');
+        $article->update($data);
+        return redirect()->route('articles.show', compact('article'));
     }
 
-    public function delete() {
-        $article = Article::withTrashed()->find(2);
-        $article->restore();
-
-        dd('Deleted');
+    public function destroy(Article $article) {
+        $article->delete();
+        return redirect()->route('articles.index');
     }
 
     public function firstOrCreate() {
