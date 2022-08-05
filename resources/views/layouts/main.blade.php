@@ -24,13 +24,21 @@
                         <a class="nav-link active" aria-current="page" href="{{ route('main.index') }}">Main</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuArticles" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Articles
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuArticles">
                             <li><a class="dropdown-item" href="{{ route('articles.index') }}">Articles</a></li>
                             <li><a class="dropdown-item" href="{{ route('articles.create') }}">Create</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuCategories" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Categories
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuCategories">
+                            <li><a class="dropdown-item" href="{{ route('categories.index') }}">Categories</a></li>
+                            <li><a class="dropdown-item" href="{{ route('categories.create') }}">Create</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">

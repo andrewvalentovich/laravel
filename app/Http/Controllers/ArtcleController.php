@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Category;
 
 class ArtcleController extends Controller
 {
@@ -12,16 +13,26 @@ class ArtcleController extends Controller
     }                                                                       // можем получить по соответствующему имени
 
     public function create() {
-        return view('articles.create');
+        $categories = Category::all();
+        return view('articles.create', compact('categories'));
     }                                                            // можем получить по соответствующему имени
 
     public function store() {
         $data = request()->validate([
             'title' => 'string',
+            'category_id' => 'nullable',
             'description' => 'string',
             'image' => 'string',
             'content' => 'string'
         ]);
+
+        $categories = Category::all();
+        foreach ($categories as $category){
+            if ($data['category_id'] == $category->name) {
+                $data['category_id'] = $category->id;
+                break;
+            }
+        }
         Article::create($data);
         return redirect()->route('articles.index');
     }
