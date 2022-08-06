@@ -3,60 +3,80 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Category;
+use App\Models\PostTag;
+use App\Models\Tag;
 
 class ArtcleController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         $articles = Article::all();
-        foreach ($articles as $article) {
-            dump($article->title);
-        }
-        dd('close');
-    }
+        return view('articles.index', compact('articles')); // передаём переменную articles в blade, которую
+    }                                                                       // можем получить по соответствующему имени
 
-    public function create() {
-        $arr = [
-            [
-                'title' => 'Something beautiful',
-                'content' => 'Very beautiful content',
-                'image' => '',
-                'likes' => 20,
-                'is_published' => 1
-            ],
-            [
-                'title' => 'Another something beautiful',
-                'content' => 'Another very beautiful content',
-                'image' => '',
-                'likes' => 42,
-                'is_published' => 0
-            ],
-        ];
+    public function create()
+    {
+        $categories = Category::all();
+        $tags = Tag::all();
+        return view('articles.create', compact('categories', 'tags'));
+    }                                                            // можем получить по соответствующему имени
 
-        foreach ($arr as $item) {
-            Article::create($item);
-        }
-
-        dd('Created');
-    }
-
-    public function update() {
-        $article = Article::find(2);
-        $article->update([
-            'title' => 'Updated something beautiful',
-            'content' => 'Updated very beautiful content'
+    public function store()
+    {
+        $data = request()->validate([
+            'title' => 'required|string',
+            'category_id' => 'nullable',
+            'tags' => 'required',
+            'description' => 'required|string',
+            'image' => 'required|string',
+            'content' => 'required|string'
         ]);
+        $tags = $data['tags'];
+        unset($data['tags']);
+        $article = Article::create($data);
+        $article->tags()->attach($tags);
 
-        dd('Updated');
+        return redirect()->route('articles.index');
     }
 
-    public function delete() {
-        $article = Article::withTrashed()->find(2);
-        $article->restore();
-
-        dd('Deleted');
+    public function show(Article $article) {
+        return view('articles.show', compact('article'));
     }
 
-    public function firstOrCreate() {
+    public function edit(Article $article)
+    {
+        $categories = Category::all();
+        $tags = Tag::all();
+        return view('articles.edit', compact('article', 'categories', 'tags'));
+    }
+
+    public function update(Article $article)
+    {
+        $data = request()->validate([
+            'title' => 'required|string',
+            'category_id' => 'nullable',
+            'tags' => 'required',
+            'description' => 'required|string',
+            'image' => 'required|string',
+            'content' => 'required|string'
+        ]);
+        $tags = $data['tags'];
+        unset($data['tags']);
+
+        $article->update($data);
+        $article->tags()->sync($tags);
+        return redirect()->route('articles.show', compact('article'));
+    }
+
+    public function destroy(Article $article)
+    {
+        $article->delete();
+        return redirect()->route('articles.index');
+    }
+
+    public function firstOrCreate()
+    {
         $article = Article::firstOrCreate([
             'title' => 'Something beautiful'
         ],[
@@ -71,7 +91,8 @@ class ArtcleController extends Controller
         dd('First or create');
     }
 
-    public function updateOrCreate() {
+    public function updateOrCreate()
+    {
         $article = Article::updateOrCreate([
             'title' => 'Something ugly'
         ],[
