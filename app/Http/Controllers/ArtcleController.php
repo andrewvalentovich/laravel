@@ -47,7 +47,8 @@ class ArtcleController extends Controller
     public function edit(Article $article)
     {
         $categories = Category::all();
-        return view('articles.edit', compact('article', 'categories'));
+        $tags = Tag::all();
+        return view('articles.edit', compact('article', 'categories', 'tags'));
     }
 
     public function update(Article $article)
@@ -55,11 +56,16 @@ class ArtcleController extends Controller
         $data = request()->validate([
             'title' => 'string',
             'category_id' => 'nullable',
+            'tags' => '',
             'description' => 'string',
             'image' => 'string',
             'content' => 'string'
         ]);
+        $tags = $data['tags'];
+        unset($data['tags']);
+
         $article->update($data);
+        $article->tags()->sync($tags);
         return redirect()->route('articles.show', compact('article'));
     }
 

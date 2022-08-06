@@ -25,6 +25,19 @@
                         </select>
                     </div>
                     <div class="mb-3">
+                        <label for="selectTag" class="form-label">Select category</label>
+                        <select multiple name="tags[]" id="selectTag"  class="form-select">
+                            @foreach($tags as $tag)
+                                <option
+                                    @foreach($article->tags as $articleTag)
+                                        {{ $tag->id === $articleTag->id ? ' selected ' : ''}}
+                                    @endforeach
+
+                                    value="{{ $tag->id }}">{{ $tag->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-3">
                         <label for="articleDescription" class="form-label">Description</label>
                         <textarea name="description" class="form-control" id="articleDescription" rows="2">{{ $article->description }}</textarea>
                     </div>
