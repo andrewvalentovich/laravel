@@ -10,6 +10,7 @@
                            class="list-group-item list-group-item-action"
                            aria-current="true"
                         >
+                            <small>{{ $category->t }}</small>
                             <p>{{ $category->id }} {{ $category->name }}</p>
                         </a>
                     @endforeach

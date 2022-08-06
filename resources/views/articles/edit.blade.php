@@ -13,6 +13,18 @@
                         <div id="articleTitle" class="form-text">We'll never share your title with anyone else.</div>
                     </div>
                     <div class="mb-3">
+                        <label for="selectCategory" class="form-label">Select category</label>
+                        <select name="category_id" id="selectCategory"  class="form-select">
+                            <option value>None</option>
+                            @foreach($categories as $category)
+                                <option
+                                    {{ is_null($article->category) ? '' : 'selected'}}
+
+                                    value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-3">
                         <label for="articleDescription" class="form-label">Description</label>
                         <textarea name="description" class="form-control" id="articleDescription" rows="2">{{ $article->description }}</textarea>
                     </div>

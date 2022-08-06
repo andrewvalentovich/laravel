@@ -16,7 +16,15 @@
                         <select name="category_id" id="selectCategory"  class="form-select">
                             <option selected value>None</option>
                             @foreach($categories as $category)
-                                <option value="{{ $category->name }}">{{ $category->name }}</option>
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="selectTag" class="form-label">Select category</label>
+                        <select multiple name="tags[]" id="selectTag"  class="form-select">
+                            @foreach($tags as $tag)
+                                <option value="{{ $tag->id }}">{{ $tag->name }}</option>
                             @endforeach
                         </select>
                     </div>

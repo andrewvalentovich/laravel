@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\PostTag;
+use App\Models\Tag;
 
 class ArtcleController extends Controller
 {
@@ -16,7 +18,8 @@ class ArtcleController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('articles.create', compact('categories'));
+        $tags = Tag::all();
+        return view('articles.create', compact('categories', 'tags'));
     }                                                            // можем получить по соответствующему имени
 
     public function store()
@@ -24,38 +27,34 @@ class ArtcleController extends Controller
         $data = request()->validate([
             'title' => 'string',
             'category_id' => 'nullable',
+            'tags' => '',
             'description' => 'string',
             'image' => 'string',
             'content' => 'string'
         ]);
+        $tags = $data['tags'];
+        unset($data['tags']);
+        $article = Article::create($data);
+        $article->tags()->attach($tags);
 
-        $categories = Category::all();
-        foreach ($categories as $category){
-            if ($data['category_id'] == $category->name) {
-                $data['category_id'] = $category->id;
-                break;
-            }
-        }
-        Article::create($data);
         return redirect()->route('articles.index');
     }
 
     public function show(Article $article) {
-
-
-        dd($article->tags);
         return view('articles.show', compact('article'));
     }
 
     public function edit(Article $article)
     {
-        return view('articles.edit', compact('article'));
+        $categories = Category::all();
+        return view('articles.edit', compact('article', 'categories'));
     }
 
     public function update(Article $article)
     {
         $data = request()->validate([
             'title' => 'string',
+            'category_id' => 'nullable',
             'description' => 'string',
             'image' => 'string',
             'content' => 'string'
