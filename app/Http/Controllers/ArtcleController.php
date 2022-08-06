@@ -25,12 +25,12 @@ class ArtcleController extends Controller
     public function store()
     {
         $data = request()->validate([
-            'title' => 'string',
+            'title' => 'required|string',
             'category_id' => 'nullable',
-            'tags' => '',
-            'description' => 'string',
-            'image' => 'string',
-            'content' => 'string'
+            'tags' => 'required',
+            'description' => 'required|string',
+            'image' => 'required|string',
+            'content' => 'required|string'
         ]);
         $tags = $data['tags'];
         unset($data['tags']);
@@ -54,12 +54,12 @@ class ArtcleController extends Controller
     public function update(Article $article)
     {
         $data = request()->validate([
-            'title' => 'string',
+            'title' => 'required|string',
             'category_id' => 'nullable',
-            'tags' => '',
-            'description' => 'string',
-            'image' => 'string',
-            'content' => 'string'
+            'tags' => 'required',
+            'description' => 'required|string',
+            'image' => 'required|string',
+            'content' => 'required|string'
         ]);
         $tags = $data['tags'];
         unset($data['tags']);
