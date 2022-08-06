@@ -4,6 +4,7 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArtcleController;
 
@@ -44,6 +45,10 @@ Route::group(['prefix' => 'categories'], function () {
     Route::get('/{category}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
     Route::put('/{category}', [CategoryController::class, 'update'])->name('categories.update');
     Route::delete('/{category}', [CategoryController::class, 'destroy'])->name('categories.delete');
+});
+
+Route::group(['prefix' => 'tags'], function () {
+    Route::get('/', [TagController::class, 'index'])->name('tags.index');
 });
 
 Route::get('/main', [MainController::class, 'index'])->name('main.index');

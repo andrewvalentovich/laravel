@@ -13,6 +13,9 @@
             <div class="pt-5">
                 <h1>{{ $article->id }} {{ $article->title }}</h1>
                 <i>{{ $article->description }}</i>
+                <div>
+                    <small></small>
+                </div>
                 <p class="pt-4">{{ $article->content }}</p>
             </div>
         </div>

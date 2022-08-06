@@ -13,8 +13,7 @@
                             <h5 class="mb-1">{{ $article->title }}</h5>
                             <small>{{ $article->created_at }}</small>
                         </div>
-                        <small>{{ $article->id }} {{ $article->description }}</small>
-                        <p class="mb-1">{{ $article->content }}</p>
+                        <p class="mb-1">{{ $article->description }}</p>
                     </a>
                 @endforeach
             </div>

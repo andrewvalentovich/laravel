@@ -42,6 +42,9 @@
                         </ul>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="{{ route('tags.index') }}">Tags</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('about.index') }}">About</a>
                     </li>
                     <li class="nav-item">

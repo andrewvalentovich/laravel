@@ -7,17 +7,20 @@ use App\Models\Category;
 
 class ArtcleController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         $articles = Article::all();
         return view('articles.index', compact('articles')); // передаём переменную articles в blade, которую
     }                                                                       // можем получить по соответствующему имени
 
-    public function create() {
+    public function create()
+    {
         $categories = Category::all();
         return view('articles.create', compact('categories'));
     }                                                            // можем получить по соответствующему имени
 
-    public function store() {
+    public function store()
+    {
         $data = request()->validate([
             'title' => 'string',
             'category_id' => 'nullable',
@@ -38,14 +41,19 @@ class ArtcleController extends Controller
     }
 
     public function show(Article $article) {
+
+
+        dd($article->tags);
         return view('articles.show', compact('article'));
     }
 
-    public function edit(Article $article) {
+    public function edit(Article $article)
+    {
         return view('articles.edit', compact('article'));
     }
 
-    public function update(Article $article) {
+    public function update(Article $article)
+    {
         $data = request()->validate([
             'title' => 'string',
             'description' => 'string',
@@ -56,12 +64,14 @@ class ArtcleController extends Controller
         return redirect()->route('articles.show', compact('article'));
     }
 
-    public function destroy(Article $article) {
+    public function destroy(Article $article)
+    {
         $article->delete();
         return redirect()->route('articles.index');
     }
 
-    public function firstOrCreate() {
+    public function firstOrCreate()
+    {
         $article = Article::firstOrCreate([
             'title' => 'Something beautiful'
         ],[
@@ -76,7 +86,8 @@ class ArtcleController extends Controller
         dd('First or create');
     }
 
-    public function updateOrCreate() {
+    public function updateOrCreate()
+    {
         $article = Article::updateOrCreate([
             'title' => 'Something ugly'
         ],[
