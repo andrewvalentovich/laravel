@@ -9,7 +9,7 @@ class IndexController extends BaseController
 {
     public function __invoke()
     {
-        $articles = Article::all();
+        $articles = Article::paginate(10);
         return view('articles.index', compact('articles')); // передаём переменную articles в blade, которую
     }                                                                       // можем получить по соответствующему имени
 }

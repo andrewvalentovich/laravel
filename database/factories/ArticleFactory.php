@@ -20,7 +20,7 @@ class ArticleFactory extends Factory
         return [
             'title' => $this->faker->sentence(6),
             'description' => $this->faker->text(50),
-            'content' => $this->faker->text(50),
+            'content' => $this->faker->text(510),
             'image' => $this->faker->imageUrl,
             'likes' => random_int(0, 300),
             'is_published' => 1,
