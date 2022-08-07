@@ -1,6 +1,13 @@
 <?php
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\Article\CreateController;
+use App\Http\Controllers\Article\DestroyController;
+use App\Http\Controllers\Article\EditController;
+use App\Http\Controllers\Article\IndexController;
+use App\Http\Controllers\Article\ShowController;
+use App\Http\Controllers\Article\StoreController;
+use App\Http\Controllers\Article\UpdateController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\MainController;
@@ -23,18 +30,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix' => 'articles'], function () {
-    Route::get('/', [ArtcleController::class, 'index'])->name('articles.index');
-    Route::get('/create', [ArtcleController::class, 'create'])->name('articles.create');
-    Route::post('/', [ArtcleController::class, 'store'])->name('articles.store');
-    Route::get('/{article}', [ArtcleController::class, 'show'])->name('articles.show');
-    Route::get('/{article}/edit', [ArtcleController::class, 'edit'])->name('articles.edit');
-    Route::put('/{article}', [ArtcleController::class, 'update'])->name('articles.update');
-    Route::delete('/{article}', [ArtcleController::class, 'destroy'])->name('articles.delete');
-
-    Route::get('/delete', [ArtcleController::class, 'delete']);
-    Route::get('/first_or_create', [ArtcleController::class, 'firstOrCreate']);
-    Route::get('/update_or_create', [ArtcleController::class, 'updateOrCreate']);
+Route::group(['prefix' => 'articles', 'namespace' => 'Article'], function () {
+    Route::get('/', [IndexController::class, '__invoke'])->name('articles.index');
+    Route::get('/create', [CreateController::class, '__invoke'])->name('articles.create');
+    Route::post('/', [StoreController::class, '__invoke'])->name('articles.store');
+    Route::get('/{article}', [ShowController::class, '__invoke'])->name('articles.show');
+    Route::get('/{article}/edit', [EditController::class, '__invoke'])->name('articles.edit');
+    Route::put('/{article}', [UpdateController::class, '__invoke'])->name('articles.update');
+    Route::delete('/{article}', [DestroyController::class, '__invoke'])->name('articles.delete');
 });
 
 Route::group(['prefix' => 'categories'], function () {
