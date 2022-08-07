@@ -7,17 +7,12 @@ use App\Http\Requests\Article\StoreRequest;
 use App\Models\Article;
 use Illuminate\Http\Request;
 
-class StoreController extends Controller
+class StoreController extends BaseController
 {
     public function __invoke(StoreRequest $request)
     {
         $data = $request->validated();
-        $tags = $data['tags'];
-        unset($data['tags']);
-
-        $article = Article::create($data);
-        $article->tags()->attach($tags);
-
+        $this->service->store($data);
         return redirect()->route('articles.index');
     }
 }

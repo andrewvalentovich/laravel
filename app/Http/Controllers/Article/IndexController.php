@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Article;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 
-class IndexController extends Controller
+class IndexController extends BaseController
 {
     public function __invoke()
     {

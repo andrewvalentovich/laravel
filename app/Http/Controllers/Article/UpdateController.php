@@ -7,17 +7,12 @@ use App\Http\Requests\Article\StoreRequest;
 use App\Models\Article;
 use Illuminate\Http\Request;
 
-class UpdateController extends Controller
+class UpdateController extends BaseController
 {
     public function __invoke(StoreRequest $request, Article $article)
     {
         $data = $request->validated();
-        $tags = $data['tags'];
-        unset($data['tags']);
-
-        $article->update($data);
-        $article->tags()->sync($tags);
-
-        return redirect()->route('articles.show', compact('article'));
+        $this->service->update($article, $data);
+        return redirect()->route('articles.show', $article->id);
     }
 }
