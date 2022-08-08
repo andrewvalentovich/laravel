@@ -26,7 +26,7 @@
                 @endforeach
             </div>
             <div class="pt-5">
-                {{ $articles->links() }}
+                {{ $articles->withQueryString()->links() }}
             </div>
         </div>
     </div>
