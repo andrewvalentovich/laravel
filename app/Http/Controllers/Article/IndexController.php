@@ -14,7 +14,6 @@ class IndexController extends BaseController
         $filter = app()->make(ArticleFilter::class, ['queryParams' => array_filter($data)]);
         $articles = Article::filter($filter)->paginate(10);
 
-        dd($articles);
         return view('articles.index', compact('articles')); // передаём переменную articles в blade, которую
     }                                                                       // можем получить по соответствующему имени
 }

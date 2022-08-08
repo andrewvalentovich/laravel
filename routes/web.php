@@ -13,7 +13,6 @@ use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ArtcleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +47,12 @@ Route::group(['prefix' => 'categories'], function () {
     Route::get('/{category}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
     Route::put('/{category}', [CategoryController::class, 'update'])->name('categories.update');
     Route::delete('/{category}', [CategoryController::class, 'destroy'])->name('categories.delete');
+});
+
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
+    Route::group(['namespace' => 'Article'], function () {
+        Route::get('/', [\App\Http\Controllers\Admin\Article\IndexController::class, '__invoke'])->name('admin.article.index');
+    });
 });
 
 Route::group(['prefix' => 'tags'], function () {
