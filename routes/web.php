@@ -30,7 +30,7 @@ use Illuminate\Support\Facades\Route;
 //    return view('welcome');
 //});
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::group(['prefix' => 'articles', 'namespace' => 'Article'], function () {
     Route::get('/', [IndexController::class, '__invoke'])->name('articles.index');
@@ -52,7 +52,7 @@ Route::group(['prefix' => 'categories'], function () {
     Route::delete('/{category}', [CategoryController::class, 'destroy'])->name('categories.delete');
 });
 
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'admin'], function () {
     Route::group(['namespace' => 'Article'], function () {
         Route::get('/', [\App\Http\Controllers\Admin\Article\IndexController::class, '__invoke'])->name('admin.article.index');
     });
