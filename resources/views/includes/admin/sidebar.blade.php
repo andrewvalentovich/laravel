@@ -3,13 +3,26 @@
     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-header">Admin panel</li>
         <li class="nav-item">
-            <a href="pages/calendar.html" class="nav-link">
+            <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-align-justify"></i>
+                <span class="badge badge-info right">{{ $articles->total() }}</span>
                 <p>
                     Articles
-                    <span class="badge badge-info right">{{ $articles->total() }}</span>
+                    <i class="fas fa-angle-left right"></i>
                 </p>
             </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{ route('admin.articles.index') }}" class="nav-link">
+                        <p>Show</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.articles.create') }}" class="nav-link">
+                        <p>Create</p>
+                    </a>
+                </li>
+            </ul>
         </li>
 {{--        <li class="nav-item">--}}
 {{--            <a href="pages/gallery.html" class="nav-link">--}}

@@ -1,11 +1,10 @@
 @extends('layouts.admin')
-
 @section('content')
-    <div class="row py-5">
+    <div class="row py-5 flex-column">
         <h1>Index page</h1>
         <div class="list-group pt-5">
             @foreach($articles as $article)
-                <a href="{{ route('articles.show', ['article' => $article->id]) }}"
+                <a href="{{ route('admin.articles.show', ['article' => $article->id]) }}"
                    class="list-group-item list-group-item-action"
                    aria-current="true"
                 >

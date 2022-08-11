@@ -21,7 +21,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -32,8 +32,28 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
+                    <ul class="navbar-nav me-auto px-5">
+                        @can('view', auth()->user())
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="{{ route('admin.index') }}">Admin</a>
+                            </li>
+                        @endcan
 
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{{ route('articles.index') }}">Articles</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{{ route('categories.index') }}">Categories</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{{ route('tags.index') }}">Tags</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('about.index') }}">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('contacts.index') }}">Contacts</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -75,7 +95,7 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="py-5">
             @yield('content')
         </main>
     </div>

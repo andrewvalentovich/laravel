@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Article;
+namespace App\Http\Controllers\Admin\Articles;
 
 use App\Http\Controllers\Controller;
 use App\Http\Filters\ArticleFilter;
@@ -14,6 +14,6 @@ class IndexController extends Controller
         $data = $request->validated();
         $filter = app()->make(ArticleFilter::class, ['queryParams' => array_filter($data)]);
         $articles = Article::filter($filter)->paginate(10);
-        return view('admin.article.index', compact('articles'));
+        return view('admin.articles.index', compact('articles'));
     }
 }

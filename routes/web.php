@@ -54,7 +54,17 @@ Route::group(['prefix' => 'categories'], function () {
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'admin'], function () {
     Route::group(['namespace' => 'Article'], function () {
-        Route::get('/', [\App\Http\Controllers\Admin\Article\IndexController::class, '__invoke'])->name('admin.article.index');
+        Route::get('/', [\App\Http\Controllers\Admin\IndexController::class, '__invoke'])->name('admin.index');
+
+        Route::group(['prefix' => 'articles'], function () {
+            Route::get('/', [\App\Http\Controllers\Admin\Articles\IndexController::class, '__invoke'])->name('admin.articles.index');
+            Route::get('/create', [\App\Http\Controllers\Admin\Articles\CreateController::class, '__invoke'])->name('admin.articles.create');
+            Route::post('/', [\App\Http\Controllers\Admin\Articles\StoreController::class, '__invoke'])->name('admin.articles.store');
+            Route::get('/{article}', [\App\Http\Controllers\Admin\Articles\ShowController::class, '__invoke'])->name('admin.articles.show');
+            Route::get('/{article}/edit', [\App\Http\Controllers\Admin\Articles\EditController::class, '__invoke'])->name('admin.articles.edit');
+            Route::put('/{article}', [\App\Http\Controllers\Admin\Articles\UpdateController::class, '__invoke'])->name('admin.articles.update');
+            Route::delete('/{article}', [\App\Http\Controllers\Admin\Articles\DestroyController::class, '__invoke'])->name('admin.articles.delete');
+        });
     });
 });
 

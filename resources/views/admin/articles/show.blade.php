@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 @section('content')
     <div class="container">
-        <div class="row pt-5">
+        <div class="row flex-column py-5">
             <div class="d-flex">
-                <a class="btn btn-primary" href="{{ route('articles.edit', ['article' => $article->id]) }}">Edit article</a>
-                <form action="{{ route('articles.delete', ['article' => $article]) }}" method="post" class="ms-1">
+                <a class="btn btn-primary" href="{{ route('admin.articles.edit', ['article' => $article->id]) }}">Edit article</a>
+                <form action="{{ route('admin.articles.delete', ['article' => $article]) }}" method="post" class="mx-1">
                     @csrf
                     @method('delete')
                     <input type="submit" value="Delete article" class="btn btn-danger">
