@@ -19,7 +19,7 @@ class AdminPanelMiddleware
         if (auth()->user()->role !== 'admin') {
             return redirect()->route('home');
         }
-        
+
         return $next($request);
     }
 }
