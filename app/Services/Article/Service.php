@@ -14,6 +14,8 @@ class Service
         unset($data['tags']);
         $article = Article::create($data);
         $article->tags()->attach($tags);
+
+        return $article;
     }
 
     public function update($article, $data)
@@ -23,5 +25,7 @@ class Service
 
         $article->update($data);
         $article->tags()->sync($tags);
+
+        return $article->fresh();
     }
 }
