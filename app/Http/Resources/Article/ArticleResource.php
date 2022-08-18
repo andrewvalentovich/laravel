@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources\Article;
 
+use App\Http\Resources\Category\CategoryResource;
+use App\Http\Resources\Tag\TagResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ArticleResource extends JsonResource
@@ -18,7 +20,9 @@ class ArticleResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
-            'content' => $this->content
+            'content' => $this->content,
+            'category' => new CategoryResource($this->category),
+            'tags' => TagResource::collection($this->tags),
         ];
     }
 }

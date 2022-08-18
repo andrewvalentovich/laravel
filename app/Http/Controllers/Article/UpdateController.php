@@ -14,8 +14,8 @@ class UpdateController extends BaseController
     {
         $data = $request->validated();
         $article = $this->service->update($article, $data);
-
-        return new ArticleResource($article);
+        return $article instanceof Article ? new ArticleResource($article) : $article;
+//        return new ArticleResource($article);
 
 //        return redirect()->route('articles.show', $article->id);
     }

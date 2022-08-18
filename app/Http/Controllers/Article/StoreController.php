@@ -14,7 +14,7 @@ class StoreController extends BaseController
     {
         $data = $request->validated();
         $article = $this->service->store($data);
-        return new ArticleResource($article);
+        return $article instanceof Article ? new ArticleResource($article) : $article;
 //        return redirect()->route('articles.index');
     }
 }
