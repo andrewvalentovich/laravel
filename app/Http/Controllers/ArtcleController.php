@@ -20,7 +20,7 @@ class ArtcleController extends Controller
         $categories = Category::all();
         $tags = Tag::all();
         return view('articles.create', compact('categories', 'tags'));
-    }                                                            // можем получить по соответствующему имени
+    }
 
     public function store()
     {
